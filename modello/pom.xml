@@ -2,10 +2,10 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.codehaus.modello</groupId>
   <artifactId>modello</artifactId>
-  <version>1.0-alpha-2-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <version>1.0-alpha-1</version>
   <name>Modello Parent</name>
   <inceptionYear>2001</inceptionYear>
+  <packaging>pom</packaging>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -32,10 +32,16 @@
     <url>http://www.codehaus.org/</url>
   </organization>
   <distributionManagement>
+<!--
+    <repository>
+      <id>codehaus</id>
+      <name>Maven Central Repository at Codehaus</name>
+      <url>scp://beaver.codehaus.org//home/projects/modello/dist/</url>
+    </repository>
+-->
     <repository>
       <id>repo1</id>
-      <name>Maven Central Repository at Codehaus</name>
-      <url>scp://beaver.codehaus.org/home/projects/maven/repository/ibiblio-v2/</url>
+      <url>scp://repo1.maven.org/home/projects/maven/repository/ibiblio-v2/</url>
     </repository>
   </distributionManagement>
   <modules>
@@ -43,6 +49,5 @@
     <module>modello-core</module>
     <module>modello-test</module>
     <module>modello-plugins</module>
-    <module>modello-plugins-sandbox</module>
   </modules>
 </project>

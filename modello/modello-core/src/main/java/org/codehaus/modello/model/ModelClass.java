@@ -84,8 +84,8 @@ public class ModelClass
     }
 
     /**
-     * Returns the list of all interfaces of this class.
-     *
+     * Returns the list of all interfaces of this class. 
+     * 
      * @return Returns the list of all interfaces of this class.
      */
     public List getInterfaces()
@@ -106,11 +106,6 @@ public class ModelClass
         }
 
         getInterfaces().add( modelInterface );
-    }
-
-    public String getPackageName()
-    {
-        return getPackageName( false, null );
     }
 
     public String getPackageName( boolean withVersion, Version version )
@@ -147,11 +142,11 @@ public class ModelClass
     }
 
     /**
-     * Returns the list of all fields in this class.
-     *
+     * Returns the list of all fields in this class. 
+     * 
      * It does not include the fields of super classes.
-     *
-     * @return Returns the list of all fields in this class. It does not include the
+     * 
+     * @return Returns the list of all fields in this class. It does not include the 
      *         fields of super classes.
      */
     public List getAllFields()
@@ -194,11 +189,11 @@ public class ModelClass
     }
 
     /**
-     * Returns the list of all fields in this class for a specific version.
-     *
+     * Returns the list of all fields in this class for a specific version. 
+     * 
      * It does not include the fields of super classes.
-     *
-     * @return Returns the list of all fields in this class. It does not include the
+     * 
+     * @return Returns the list of all fields in this class. It does not include the 
      *         fields of super classes.
      */
     public List getFields( Version version )
@@ -220,7 +215,7 @@ public class ModelClass
 
     /**
      * Returns all the fields in this class and all super classes if withInheritedField equals to true.
-     *
+     * 
      * @return Returns all the fields in this class and all super classes.
      */
     public List getAllFields( boolean withInheritedField )
@@ -229,7 +224,7 @@ public class ModelClass
         {
             return getAllFields();
         }
-
+        
         List fields = new ArrayList( getAllFields() );
 
         ModelClass c = this;
@@ -254,7 +249,7 @@ public class ModelClass
     public ModelField getField( String type, VersionRange versionRange )
     {
         ArrayList fieldList = (ArrayList) fieldMap.get( type );
-
+        
         if ( fieldList != null )
         {
             for (Iterator i = fieldList.iterator(); i.hasNext(); )
@@ -291,7 +286,7 @@ public class ModelClass
         else
         {
             ArrayList fieldList = new ArrayList();
-
+        
             fieldMap.put( modelField.getName(), fieldList );
         }
 

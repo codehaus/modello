@@ -52,6 +52,7 @@ import java.util.Properties;
 public class Xpp3ReaderGenerator
     extends AbstractXpp3Generator
 {
+
     public void generate( Model model, Properties parameters )
         throws ModelloException
     {
@@ -113,10 +114,6 @@ public class Xpp3ReaderGenerator
         jClass.addImport( "java.util.ArrayList" );
 
         jClass.addImport( "java.util.List" );
-
-        jClass.addImport( "java.text.DateFormat" );
-
-        jClass.addImport( "java.text.ParsePosition" );
 
         addModelImports( jClass, null );
 
@@ -656,11 +653,11 @@ public class Xpp3ReaderGenerator
         else
         {
             parserGetter = "parser.nextText()";
-        }
 
-        if ( fieldMetaData.isTrim() )
-        {
-            parserGetter += ".trim()";
+            if ( fieldMetaData.isTrim() )
+            {
+                parserGetter += ".trim()";
+            }
         }
 
         if ( "boolean".equals( type ) )
@@ -691,16 +688,10 @@ public class Xpp3ReaderGenerator
         {
             sc.add( objectName + "." + setterName + "( (new Short( " + parserGetter + " ) ).shortValue() );" );
         }
-        else if ( "String".equals( type ) || "Boolean".equals( type ) )
+        else if ( "String".equals( type ) || "Boolean".equals( type ) || "Date".equals( type ) )
         {
             // TODO: other Primitive types
             sc.add( objectName + "." + setterName + "( " + parserGetter + " );" );
-        }
-        else if ( "Date".equals( type ) )
-        {
-            sc.add( "DateFormat dateParser = DateFormat.getDateTimeInstance( DateFormat.FULL, DateFormat.FULL );" );
-
-            sc.add( objectName + "." + setterName + "( dateParser.parse( " + parserGetter + ", new ParsePosition( 0 ) ) );" );
         }
         else if ( "DOM".equals( type ) )
         {
