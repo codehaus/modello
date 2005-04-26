@@ -31,8 +31,6 @@ import org.codehaus.modello.model.Model;
 import org.codehaus.modello.model.ModelAssociation;
 import org.codehaus.modello.model.ModelClass;
 import org.codehaus.modello.model.ModelField;
-import org.codehaus.modello.StringUtils;
-import org.codehaus.modello.ModelloException;
 
 import java.util.Collections;
 import java.util.Map;
@@ -55,86 +53,28 @@ public class StoreMetadataPlugin
 
     public ClassMetadata getClassMetadata( ModelClass clazz, Map data )
     {
-        StoreClassMetadata metadata = new StoreClassMetadata();
+        StoreClassMetadata classMetadata = new StoreClassMetadata();
 
         String storable = (String) data.get( "stash.storable" );
 
         if ( storable != null && storable.equals( "true" ) )
         {
-            metadata.setStorable( true );
+            classMetadata.setStorable( true );
         }
 
-        return metadata;
+        return classMetadata;
     }
 
     public FieldMetadata getFieldMetadata( ModelField field, Map data )
-        throws ModelloException
     {
         StoreFieldMetadata metadata = new StoreFieldMetadata();
-
-        // ----------------------------------------------------------------------
-        // Fields are per default storable as the fields can't be persisted
-        // unless the class itself is storable.
-        // ----------------------------------------------------------------------
-
-        String storable = (String) data.get( "stash.storable" );
-
-        if ( storable != null && storable.equals( "false" ) )
-        {
-            metadata.setStorable( false );
-        }
-        else
-        {
-            metadata.setStorable( true );
-        }
-
-        String maxSize = (String) data.get( "stash.maxSize" );
-
-        if ( !StringUtils.isEmpty( maxSize ) )
-        {
-            if ( !field.getType().equals( "String" ) )
-            {
-                throw new ModelloException( "When specifying max size on a field the type must be String. " +
-                                            "Class: '" + field.getModelClass().getName() + "', " +
-                                            "field : '" + field.getName() + "'." );
-            }
-
-            try
-            {
-                metadata.setMaxSize( Integer.parseInt( maxSize ) );
-            }
-            catch ( NumberFormatException e )
-            {
-                throw new ModelloException( "Max size on a field the type must be String. " +
-                                            "Class: '" + field.getModelClass().getName() + "', " +
-                                            "field : '" + field.getName() + "'." );
-            }
-        }
 
         return metadata;
     }
 
     public AssociationMetadata getAssociationMetadata( ModelAssociation association, Map data )
     {
-        StoreAssociationMetadata metadata = new StoreAssociationMetadata();
-
-        // ----------------------------------------------------------------------
-        // Associations are per default storable as the fields can't be persisted
-        // unless the class itself is storable.
-        // ----------------------------------------------------------------------
-
-        String storable = (String) data.get( "stash.storable" );
-
-        if ( storable != null && !storable.equals( "false" ) )
-        {
-            metadata.setStorable( false );
-        }
-        else
-        {
-            metadata.setStorable( true );
-        }
-
-        return metadata;
+        return new StoreAssociationMetadata();
     }
 
     // ----------------------------------------------------------------------

@@ -1,17 +1,24 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.codehaus.modello</groupId>
+    <groupId>modello</groupId>
     <artifactId>modello-plugins</artifactId>
-    <version>1.0-alpha-2-SNAPSHOT</version>
+    <version>1.0-alpha-1-SNAPSHOT</version>
   </parent>
+  <groupId>modello</groupId>
   <artifactId>modello-plugin-prevayler</artifactId>
+  <version>1.0-alpha-1-SNAPSHOT</version>
   <name>Modello Prevayler Plugin</name>
   <dependencies>
     <dependency>
-      <groupId>org.codehaus.modello</groupId>
+      <groupId>plexus</groupId>
+      <artifactId>plexus-velocity</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>modello</groupId>
       <artifactId>modello-plugin-store</artifactId>
-      <version>1.0-alpha-2-SNAPSHOT</version>
+      <version>1.0-alpha-1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>

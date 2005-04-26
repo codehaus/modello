@@ -1,13 +1,8 @@
 <model>
-  <id>maven-java-mojo-test-model</id>
-  <name>Modello Java Mojo Test Model</name>
+  <id>maven</id>
+  <name>Maven</name>
+  <packageName>org.codehaus.mojo.modello.javatest</packageName>
   <root>Model</root>
-  <defaults>
-    <default>
-      <key>package</key>
-      <value>org.codehaus.mojo.modello.javatest</value>
-    </default>
-  </defaults>
   <classes>
     <class>
       <name>Model</name>

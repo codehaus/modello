@@ -39,7 +39,7 @@ public class PrevaylerModelloGeneratorTest
 {
     public PrevaylerModelloGeneratorTest()
     {
-        super( "prevayler" );
+        super( "prevalyer" );
     }
 
     public void testSimpleInvocation()
@@ -55,8 +55,8 @@ public class PrevaylerModelloGeneratorTest
 
         parameters.setProperty( ModelloParameterConstants.VERSION, "4.0.0" );
 
-        parameters.setProperty( ModelloParameterConstants.PACKAGE_WITH_VERSION, Boolean.FALSE.toString() );
+        parameters.setProperty( ModelloParameterConstants.PACKAGE_WITH_VERSION, Boolean.toString( false ) );
 
-        core.generate( model, "prevayler", parameters );
+        core.generate( model, "prevalyer", parameters );
     }
 }

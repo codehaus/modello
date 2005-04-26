@@ -31,29 +31,4 @@ import org.codehaus.modello.metadata.FieldMetadata;
 public class StoreFieldMetadata
     implements FieldMetadata
 {
-    public static final String ID = StoreFieldMetadata.class.getName();
-
-    private boolean storable;
-
-    private int maxSize;
-
-    public void setStorable( boolean storable )
-    {
-        this.storable = storable;
-    }
-
-    public boolean isStorable()
-    {
-        return storable;
-    }
-
-    public int getMaxSize()
-    {
-        return maxSize;
-    }
-
-    public void setMaxSize( int maxSize )
-    {
-        this.maxSize = maxSize;
-    }
 }

@@ -24,6 +24,9 @@ package org.codehaus.modello.plugin.store.metadata;
 
 import org.codehaus.modello.metadata.ClassMetadata;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * @author <a href="mailto:jason@maven.org">Jason van Zyl</a>
  * @version $Id$
@@ -31,7 +34,7 @@ import org.codehaus.modello.metadata.ClassMetadata;
 public class StoreClassMetadata
     implements ClassMetadata
 {
-    public static final String ID = StoreClassMetadata.class.getName();
+    public static String ID = StoreClassMetadata.class.getName();
 
     private boolean storable;
 
