@@ -52,32 +52,7 @@
 
 package org.codehaus.modello.generator.java.javasource;
 
-/*
- * Copyright (c) 2004, Codehaus.org
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- * of the Software, and to permit persons to whom the Software is furnished to do
- * so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
 
 /**
@@ -280,7 +255,7 @@ public class JClass extends JStructure
         //-- keep method list sorted for esthetics when printing
         //-- START SORT :-)
         boolean added = false;
-//        short modifierVal = 0;
+        short modifierVal = 0;
         JModifiers modifiers = jMethod.getModifiers();
 
         if ( modifiers.isAbstract() )
@@ -598,10 +573,10 @@ public class JClass extends JStructure
                 for ( int i = 0; i < _innerClasses.size(); i++ )
                 {
                     JClass iClass = (JClass) _innerClasses.elementAt( i );
-                    Enumeration e = iClass.getImports();
-                    while ( e.hasMoreElements() )
+                    Enumeration enum = iClass.getImports();
+                    while ( enum.hasMoreElements() )
                     {
-                        String classname = (String) e.nextElement();
+                        String classname = (String) enum.nextElement();
                         if ( !hasImport( classname ) )
                         {
                             addImport( classname );
@@ -669,11 +644,11 @@ public class JClass extends JStructure
             }
             buffer.append( "implements " );
 
-            Enumeration e = getInterfaces();
-            while ( e.hasMoreElements() )
+            Enumeration enum = getInterfaces();
+            while ( enum.hasMoreElements() )
             {
-                buffer.append( e.nextElement() );
-                if ( e.hasMoreElements() ) buffer.append( ", " );
+                buffer.append( enum.nextElement() );
+                if ( enum.hasMoreElements() ) buffer.append( ", " );
             }
             if ( endl )
             {
@@ -800,21 +775,19 @@ public class JClass extends JStructure
         }
 
         jsw.unindent();
-
-        for ( Iterator iterator = sourceCodeEntries.iterator(); iterator.hasNext(); )
+        if ( sourceCode != null )
         {
-            jsw.write( (String) iterator.next() );
+            jsw.write( sourceCode );
         }
-
         jsw.writeln( '}' );
         jsw.flush();
     } //-- printSource
 
-    private List sourceCodeEntries = new ArrayList();
+    private String sourceCode;
 
-    public void addSourceCode( String sourceCode )
+    public void setSourceCode( String sourceCode )
     {
-        sourceCodeEntries.add( sourceCode );
+        this.sourceCode = sourceCode;
     }
 
     /**

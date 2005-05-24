@@ -22,26 +22,22 @@ package org.codehaus.modello;
  * SOFTWARE.
  */
 
-import org.apache.maven.artifact.DefaultArtifact;
-import org.apache.maven.artifact.repository.ArtifactRepository;
-import org.apache.maven.artifact.repository.layout.ArtifactRepositoryLayout;
-import org.apache.maven.settings.MavenSettingsBuilder;
-import org.codehaus.plexus.PlexusTestCase;
-import org.codehaus.plexus.compiler.Compiler;
-import org.codehaus.plexus.compiler.CompilerConfiguration;
-import org.codehaus.plexus.compiler.CompilerError;
-import org.codehaus.plexus.compiler.javac.JavacCompiler;
-import org.codehaus.plexus.util.FileUtils;
-
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Arrays;
+
+import org.codehaus.plexus.compiler.Compiler;
+import org.codehaus.plexus.compiler.CompilerError;
+import org.codehaus.plexus.compiler.CompilerConfiguration;
+import org.codehaus.plexus.compiler.javac.JavacCompiler;
+import org.codehaus.plexus.PlexusTestCase;
+import org.codehaus.plexus.util.FileUtils;
 
 /**
  * @author <a href="mailto:trygvis@inamo.no">Trygve Laugst&oslash;l</a>
@@ -56,8 +52,6 @@ public abstract class ModelloGeneratorTest
 
     private List urls = new ArrayList();
 
-    private ArtifactRepository repository;
-
     protected ModelloGeneratorTest( String name )
     {
         this.name = name;
@@ -71,12 +65,6 @@ public abstract class ModelloGeneratorTest
         FileUtils.deleteDirectory( getGeneratedSources() );
 
         assertTrue( getGeneratedSources().mkdirs() );
-
-        MavenSettingsBuilder builder = (MavenSettingsBuilder) container.lookup( MavenSettingsBuilder.ROLE );
-        ArtifactRepositoryLayout repositoryLayout = (ArtifactRepositoryLayout) container.lookup(
-            ArtifactRepositoryLayout.ROLE, "default" );
-        String url = "file://" + builder.buildSettings().getActiveProfile().getLocalRepository();
-        repository = new ArtifactRepository( "local", url, repositoryLayout );
     }
 
     protected File getGeneratedSources()
@@ -87,14 +75,19 @@ public abstract class ModelloGeneratorTest
     public void addDependency( String groupId, String artifactId, String version )
         throws Exception
     {
-        DefaultArtifact artifact = new DefaultArtifact( groupId, artifactId, version, "jar" );
-        File dependencyFile = new File( repository.getBasedir(), repository.pathOf( artifact ) );
+        String repo = System.getProperty( "maven.repo.local" );
 
-        assertTrue( "Cant find dependency: " + dependencyFile.getAbsolutePath(), dependencyFile.isFile() );
+        assertNotNull( "Missing system property: maven.repo.local", repo );
 
-        dependencies.add( dependencyFile );
+        File mavenRepoLocal = new File( repo );
 
-        addClassPathFile( dependencyFile );
+        File dependency = new File( mavenRepoLocal, groupId + "/jars/" + artifactId + "-" + version + ".jar" );
+
+        assertTrue( "Cant find dependency: " + dependency.getAbsolutePath(), dependency.isFile() );
+
+        dependencies.add( dependency );
+
+        addClassPathFile( dependency );
     }
 
     public String getName()
@@ -112,10 +105,7 @@ public abstract class ModelloGeneratorTest
     {
         addDependency( "junit", "junit", "3.8.1" );
 
-        addDependency( "plexus", "plexus-utils", "1.0-alpha-3" );
-
-        // TODO: can read my own POM to set this!
-        addDependency( "org.codehaus.modello", "modello-test", "1.0-alpha-3-SNAPSHOT" );
+        addDependency( "plexus", "plexus-utils", "1.0-alpha-1-SNAPSHOT" );
 
         String[] classPathElements = new String[dependencies.size() + 2];
 
@@ -125,11 +115,13 @@ public abstract class ModelloGeneratorTest
 
         for ( int i = 0; i < dependencies.size(); i++ )
         {
-            classPathElements[i + 2] = ( (File) dependencies.get( i ) ).getAbsolutePath();
+            classPathElements[i + 2] = ((File) dependencies.get( i )).getAbsolutePath();
         }
 
-        String[] sourceDirectories = new String[]{getTestPath( "src/test/verifiers/" + getName() ),
-                                                  generatedSources.getAbsolutePath()};
+        String[] sourceDirectories = new String[]{
+            getTestPath( "src/test/verifiers/" + getName() ),
+            generatedSources.getAbsolutePath()
+        };
 
         Compiler compiler = new JavacCompiler();
 
@@ -144,8 +136,7 @@ public abstract class ModelloGeneratorTest
         {
             CompilerError message = (CompilerError) it.next();
 
-            System.out.println( message.getFile() + "[" + message.getStartLine() + "," + message.getStartColumn() +
-                                "]: " + message.getMessage() );
+            System.out.println( message.getFile() + "[" + message.getStartLine() + "," + message.getStartColumn() + "]: " + message.getMessage() );
         }
 
         assertEquals( "There was compilation errors.", 0, messages.size() );
@@ -160,8 +151,7 @@ public abstract class ModelloGeneratorTest
 
         addClassPathFile( getTestFile( "target/test-classes" ) );
 
-        URLClassLoader classLoader = URLClassLoader.newInstance( (URL[]) urls.toArray( new URL[urls.size()] ),
-                                                                 Thread.currentThread().getContextClassLoader() );
+        URLClassLoader classLoader = URLClassLoader.newInstance( (URL[]) urls.toArray( new URL[ urls.size() ] ), Thread.currentThread().getContextClassLoader() );
 
         Class clazz = classLoader.loadClass( className );
 
@@ -176,7 +166,7 @@ public abstract class ModelloGeneratorTest
         {
             verify.invoke( clazz.newInstance(), new Object[0] );
         }
-        catch ( InvocationTargetException ex )
+        catch( InvocationTargetException ex )
         {
             throw ex.getCause();
         }
@@ -200,14 +190,5 @@ public abstract class ModelloGeneratorTest
 
             System.out.println( url );
         }
-    }
-
-    protected void assertGeneratedFileExists( String filename )
-    {
-        File file = new File( getGeneratedSources(), filename );
-
-        assertTrue( "Missing generated file: " + file.getAbsolutePath(), file.canRead() );
-
-        assertTrue( "The generated file is empty.", file.length() > 0 );
     }
 }
