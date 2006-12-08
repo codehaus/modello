@@ -1,0 +1,44 @@
+<model>
+  <id>maven</id>
+  <name>VersionInField</name>
+  <defaults>
+    <default>
+      <key>package</key>
+      <value>org.codehaus.modello.test.model.vif</value>
+    </default>
+  </defaults>
+  <versionDefinition>
+    <type>field</type>
+    <value>modelVersion</value>
+  </versionDefinition>
+  <classes>
+    <class rootElement="true" xml.tagName="mavenModel" xml.namespace="http://modello.codehaus.org/test/${version}"
+           xml.schemaLocation="http://modello.codehaus.org/xsd/maven-${version}.xsd">
+      <name>Model</name>
+      <version>3.0.0+</version>
+      <fields>
+        <field>
+          <name>modelVersion</name>
+          <version>4.0.0</version>
+          <required>true</required>
+          <description>The version of this model you are using.</description>
+          <type>String</type>
+        </field>
+        <field>
+          <name>name</name>
+          <version>3.0.0+</version>
+          <required>true</required>
+          <description>Human readable name of the project.</description>
+          <type>String</type>
+        </field>
+        <field>
+          <name>description</name>
+          <version>3.0.0+</version>
+          <required>true</required>
+          <description>Human readable description of the project.</description>
+          <type>String</type>
+        </field>
+      </fields>
+    </class>
+  </classes>
+</model>
