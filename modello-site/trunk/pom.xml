@@ -1,4 +1,4 @@
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.codehaus.modello</groupId>
@@ -8,6 +8,11 @@
   <artifactId>modello-site</artifactId>
   <version>1.0-alpha-4-SNAPSHOT</version>
   <name>Codehaus Modello Site</name>
+  <scm>
+    <connection>scm:svn:http://svn.codehaus.org/modello/modello-site/trunk</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/modello/modello-site/trunk</developerConnection>
+    <url>http://svn.modello.codehaus.org/browse/modello/modello-site/trunk</url>
+  </scm>
   <distributionManagement>
     <site>
       <id>modello.website</id>
