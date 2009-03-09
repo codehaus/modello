@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+
+<features xmlns="http://modello.codehaus.org/FEATURES/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://modello.codehaus.org/FEATURES/1.0.0 http://modello.codehaus.org/features-1.0.0.xsd">
+  <versionField>1.0.0</versionField>
+  <!--required></required--><!-- TODO: this field is marked required but not set in the XML, should fail... -->
+  <identifier>id</identifier>
+  <identifierPart2><id>reference</id></identifierPart2>
+
+  <simpleTypes>
+    <primitiveBoolean>false</primitiveBoolean>
+    <primitiveByte>-70</primitiveByte>
+    <primitiveChar>h</primitiveChar>
+    <primitiveShort>-7070</primitiveShort>
+    <primitiveInt>-707070</primitiveInt>
+    <primitiveLong>-707070707070</primitiveLong>
+    <primitiveFloat>-7.7</primitiveFloat>
+    <primitiveDouble>-7.7</primitiveDouble>
+    <objectString>String value from XML file</objectString>
+    <objectDate>2007-07-21T21:07:07.007</objectDate>
+    <dom>
+      <foo>bar</foo>
+      <bar att1="value">baz</bar>
+      <el1>
+        <el2>text</el2>
+      </el1>
+    </dom>
+    <!--content attr="attribute">content value</content--><!-- MODELLO-185 -->
+  </simpleTypes>
+  <defaultValues></defaultValues>
+
+  <associationFeatures>
+    <listReferences>
+      <listReference><id>first</id></listReference>
+      <listReference><id>second</id></listReference>
+      <listReference><id>third</id></listReference>
+      <!-- MODELLO-140: alias feature is not supported by xsd plugin, need to comment this part to avoid failure
+      <listReference><key>alias</key></listReference>
+      -->
+    </listReferences>
+    <setReferences>
+      <setReference><id>first</id></setReference>
+    </setReferences>
+    <stringReferences>
+      <stringReference>first</stringReference>
+      <stringReference>second</stringReference>
+      <stringReference>third</stringReference>
+    </stringReferences>
+    <properties>
+      <theKey>theValue</theKey>
+    </properties>
+  </associationFeatures>
+
+  <javaFeatures>
+    <base baseAttribute="12">
+      <baseElement>12</baseElement>
+    </base>
+    <subClass subAttribute1="12" baseAttribute="12">
+      <subElement1>12</subElement1>
+      <baseElement>12</baseElement>
+    </subClass>
+    <subClass2 subAttribute2="12.12" subAttribute1="12" baseAttribute="12">
+      <subElement2>12.12</subElement2>
+      <subElement1>12</subElement1>
+      <baseElement>12</baseElement>
+    </subClass2>
+    <subClass3 subAttribute3="12.12" subAttribute2="12.12" subAttribute1="12" baseAttribute="12">
+      <subElement3>12.12</subElement3>
+      <subElement2>12.12</subElement2>
+      <subElement1>12</subElement1>
+      <baseElement>12</baseElement>
+    </subClass3>
+  </javaFeatures>
+
+  <xmlFeatures tagNameAttribute="another value from XML file">
+    <attributes
+      primitiveBoolean="false"
+      primitiveByte="-70"
+      primitiveChar="h"
+      primitiveShort="-7070"
+      primitiveInt="-707070"
+      primitiveLong="-707070707070"
+      primitiveFloat="-7.7"
+      primitiveDouble="-7.7"
+      objectString="String value from XML file"
+      objectDate="2012-12-24T22:12:12.012"
+    ></attributes>
+    <attributesDefault></attributesDefault>
+    <tagName>value from XML file</tagName>
+    <dateXmlFormat>2012-12-24T22:12:12</dateXmlFormat>
+    <dateLong>121212121212</dateLong>
+
+    <xmlItemsStyleFlat><id>flat first</id></xmlItemsStyleFlat>
+    <xmlItemsStyleFlat><id>flat second</id></xmlItemsStyleFlat>
+    <xmlItemsStyleFlat><id>flat third</id></xmlItemsStyleFlat>
+
+    <xmlAssociationTagNames>
+      <association><id>first</id></association>
+      <association><id>second</id></association>
+      <association><id>third</id></association>
+    </xmlAssociationTagNames>
+
+    <fieldTagNames>
+      <fieldTagName><id>first</id></fieldTagName>
+      <fieldTagName><id>second</id></fieldTagName>
+      <fieldTagName><id>third</id></fieldTagName>
+    </fieldTagNames>
+
+    <fieldTagName>
+      <association><id>first</id></association>
+      <association><id>second</id></association>
+      <association><id>third</id></association>
+    </fieldTagName>
+
+    <!-- xmlFlatAssociationTagNames -->
+    <association><id>flat first</id></association>
+    <association><id>flat second</id></association>
+    <association><id>flat third</id></association>
+
+    <explodeProperties>
+      <explodeProperty>
+        <key>theKey</key>
+        <value>theValue</value>
+      </explodeProperty>
+    </explodeProperties>
+    <inlineProperties>
+      <theKey>theValue</theKey>
+    </inlineProperties>
+
+    <!--flatExplodeProperty>
+      <key>theKey</key>
+      <value>theValue</value>
+    </flatExplodeProperty>
+    <theKey>theValue for a flat property</theKey>
+
+    <property>
+      <key>theKey</key>
+      <value>theValue</value>
+    </property-->
+
+    <xsdFeatures attribute="one more value from XML file" />
+  </xmlFeatures>
+
+  <!--node>
+    <value>1</value>
+    <child>
+      <value>2</value>
+      <child>
+        <value>3</value>
+        <child>
+          <value>4</value>
+        </child>
+      </child>
+    </child>
+  </node-->
+</features>

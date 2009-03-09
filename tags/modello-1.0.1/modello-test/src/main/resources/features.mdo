@@ -1,0 +1,1161 @@
+<?xml version="1.0"?>
+
+<model xmlns="http://modello.codehaus.org/MODELLO/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://modello.codehaus.org/MODELLO/1.0.0 http://modello.codehaus.org/xsd/modello-1.0.0.xsd"
+  xml.namespace="http://modello.codehaus.org/FEATURES/${version}"
+  xml.schemaLocation="http://modello.codehaus.org/features-${version}.xsd">
+  <id>features</id>
+  <name>ModelloFeaturesTest</name>
+  <description>A model to test Modello features with every plugin and point to plugin specific features.</description>
+
+  <defaults>
+    <!--
+     see modello-core org.codehaus.modello.model.ModelDefault class
+     available keys: checkDeprecation, package, java.util.List, java.util.Map, java.util.Properties, java.util.Set
+    -->
+    <default>
+      <key>package</key>
+      <value>org.codehaus.modello.test.features</value>
+    </default>
+  </defaults>
+
+  <versionDefinition><!-- feature really supported by StAX plugin only, which checks version of the document when parsing it -->
+    <type>field</type><!-- other value: namespace, only in StAX plugin -->
+    <value>versionField</value>
+  </versionDefinition>
+
+  <classes>
+
+    <class rootElement="true">
+      <name>Features</name>
+      <version>1.0.0+</version>
+      <!--
+        1.0.0: features supported by every plugin,
+        1.5.0: features supported by java and xdoc plugin but there are problems with some other plugins
+        2.0.0: features supported by java plugin but there are problems with some other plugins including xdoc
+      -->
+      <fields>
+        <field>
+          <name>versionField</name>
+          <version>1.0.0+</version>
+          <description>A field described as model's versionDefinition field: its value contains the version of the model used.</description>
+          <type>String</type>
+        </field>
+        <field>
+          <name>comment</name>
+          <version>1.0.0+</version>
+          <type>String</type>
+          <comment>Test of a comment.</comment>
+        </field>
+        <field>
+          <name>description</name>
+          <version>1.0.0+</version>
+          <description>Test of a description.</description>
+          <type>String</type>
+        </field>
+        <field>
+          <name>required</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description><![CDATA[<field><required>true</required></field>: Test of a required field.]]></description>
+          <type>String</type>
+        </field>
+        <field>
+          <name>identifier</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<field><identifier>true</identifier></field>: a field taking part in instance identifier.
+            This field is used to generate <code>toString()</code>, <code>hashCode()</code> and <code>equals()</code>
+            methods.]]></description>
+          <identifier>true</identifier>
+          <type>String</type>
+        </field>
+        <field>
+          <name>identifierPart2</name>
+          <version>1.0.0+</version>
+          <description>Multiple fields can be participate in an identifier, either simple types or complex ones.</description>
+          <identifier>true</identifier>
+          <association>
+            <type>Reference</type>
+          </association>
+        </field>
+        <field xdoc.separator="blank">
+          <name>simpleTypes</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>SimpleTypes</type>
+          </association>
+        </field>
+        <field>
+          <name>defaultValues</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>SimpleTypes</type>
+          </association>
+        </field>
+        <field xdoc.separator="blank">
+          <name>arrays</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>ArrayFeatures</type>
+          </association>
+        </field>
+        <field xdoc.separator="blank">
+          <name>associationFeatures</name>
+          <version>1.0.0+</version>
+          <description>Test of association features.</description>
+          <association>
+            <type>AssociationFeatures</type>
+          </association>
+        </field>
+        <field xdoc.separator="blank">
+          <name>javaFeatures</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>JavaFeatures</type>
+          </association>
+        </field>
+        <field xdoc.separator="blank">
+          <name>xmlFeatures</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>XmlFeatures</type>
+          </association>
+        </field>
+        <field xdoc.separator="blank">
+          <name>xdocFeatures</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>XdocFeatures</type>
+          </association>
+        </field>
+        <field>
+          <name>node</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>NodeItem</type>
+          </association>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0+</version>
+          <code>
+            /* this text goes directly into generated code */
+          </code>
+        </codeSegment>
+        <codeSegment>
+          <version>1.0.0+</version>
+          <code>
+            public final static String CODE_SEGMENT = "freedom with codeSegment";
+          </code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+
+    <class>
+      <name>SimpleTypes</name>
+      <version>1.0.0+</version>
+      <description><![CDATA[
+        <code>&lt;field&gt;&lt;type&gt;<i>chose a type</i>&lt;/type&gt;&lt;field&gt;</code>:
+        Test of every simple types supported.]]>
+      </description>
+      <fields>
+        <field>
+          <name>primitiveBoolean</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>boolean</code> primitive.]]></description>
+          <type>boolean</type>
+          <defaultValue>true</defaultValue>
+        </field>
+        <field>
+          <name>primitiveByte</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>byte</code> primitive.]]></description>
+          <type>byte</type>
+          <defaultValue>12</defaultValue>
+        </field>
+        <field>
+          <name>primitiveChar</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>char</code> primitive.]]></description>
+          <type>char</type>
+          <defaultValue>H</defaultValue>
+        </field>
+        <field>
+          <name>primitiveShort</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>short</code> primitive.]]></description>
+          <type>short</type>
+          <defaultValue>1212</defaultValue>
+        </field>
+        <field>
+          <name>primitiveInt</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>int</code> primitive.]]></description>
+          <type>int</type>
+          <defaultValue>121212</defaultValue>
+        </field>
+        <field>
+          <name>primitiveLong</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>long</code> primitive.]]></description>
+          <type>long</type>
+          <defaultValue>12121212</defaultValue>
+        </field>
+        <field>
+          <name>primitiveFloat</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>float</code> primitive.]]></description>
+          <type>float</type>
+          <defaultValue>12.12</defaultValue>
+        </field>
+        <field>
+          <name>primitiveDouble</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>double</code> primitive.]]></description>
+          <type>double</type>
+          <defaultValue>12.12</defaultValue>
+        </field>
+        <field>
+          <name>objectBoolean</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>Boolean</code> class.]]></description>
+          <type>Boolean</type>
+          <defaultValue>Boolean.FALSE</defaultValue>
+        </field>
+        <!--field>
+          <name>objectByte</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Byte</code> class.]]></description>
+          <type>Byte</type>
+          <defaultValue>12</defaultValue>
+        </field>
+        <field>
+          <name>objectChar</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Char</code> class.]]></description>
+          <type>Char</type>
+          <defaultValue>H</defaultValue>
+        </field>
+        <field>
+          <name>objectShort</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Short</code> class.]]></description>
+          <type>Short</type>
+          <defaultValue>1212</defaultValue>
+        </field>
+        <field>
+          <name>objectInteger</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Integer</code> class.]]></description>
+          <type>Integer</type>
+          <defaultValue>new Integer( 12 )</defaultValue>
+        </field>
+        <field>
+          <name>objectLong</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Long</code> class.]]></description>
+          <type>Long</type>
+          <defaultValue>new Long( 12 )</defaultValue>
+        </field>
+        <field>
+          <name>objectFloat</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Float</code> class.]]></description>
+          <type>Float</type>
+          <defaultValue>new Float( 12.12 )</defaultValue>
+        </field>
+        <field>
+          <name>objectDouble</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Double</code> class.]]></description>
+          <type>Double</type>
+          <defaultValue>new Double( 12.12 )</defaultValue>
+        </field-->
+        <field>
+          <name>objectString</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>String</code> class.]]></description>
+          <type>String</type>
+          <defaultValue>default value</defaultValue>
+        </field>
+        <field>
+          <name>objectDate</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Date</code> class.]]></description>
+          <type>Date</type>
+          <defaultValue>2012-12-24T22:12:12.012</defaultValue>
+        </field>
+        <field>
+          <name>dom</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>DOM</code> type.]]></description>
+          <type>DOM</type>
+        </field>
+        <field>
+          <name>content</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Content</code> type: in fact, an association to a class with attributes and
+          one <code>Content</code> field.]]></description>
+          <association>
+            <type>ContentTest</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>ContentTest</name>
+      <description><![CDATA[A model class that has only XMl attributes fields and exactly one field with
+        <code>Content</code> type.]]></description>
+      <version>1.0.0+</version>
+      <fields>
+        <field>
+          <name>content</name>
+          <description><![CDATA[The field of the class with <code>Content</code> type.]]></description>
+          <version>1.5.0+</version><!-- MODELLO-185: not supported by dom4j, jdom and stax plugins -->
+          <type>Content</type>
+        </field>
+        <field xml.attribute="true">
+          <name>attr</name>
+          <description>An XML attribute.</description>
+          <version>1.0.0+</version>
+          <type>String</type>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>ArrayFeatures</name>
+      <version>1.0.0+</version>
+      <description><![CDATA[
+        <code>&lt;field&gt;&lt;type&gt;<i>chose a type</i>[]&lt;/type&gt;&lt;field&gt;</code>:
+        Test of arrays of every types supported (java plugin only).]]>
+      </description>
+      <fields>
+        <field>
+          <name>booleanArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>boolean[]</code>.]]></description>
+          <type>boolean[]</type>
+        </field>
+        <field>
+          <name>byteArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>byte[]</code>.]]></description>
+          <type>byte[]</type>
+        </field>
+        <field>
+          <name>charArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>char[]</code>.]]></description>
+          <type>char[]</type>
+        </field>
+        <field>
+          <name>shortArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>short[]</code>.]]></description>
+          <type>short[]</type>
+        </field>
+        <field>
+          <name>intArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>int[]</code>.]]></description>
+          <type>int[]</type>
+        </field>
+        <field>
+          <name>longArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>long[]</code>.]]></description>
+          <type>long[]</type>
+        </field>
+        <field>
+          <name>floatArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>float[]</code>.]]></description>
+          <type>float[]</type>
+        </field>
+        <field>
+          <name>doubleArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>double[]</code>.]]></description>
+          <type>double[]</type>
+        </field>
+        <field>
+          <name>stringArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>String[]</code>.]]></description>
+          <type>String[]</type>
+        </field>
+        <field>
+          <name>dateArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>Date[]</code>.]]></description>
+          <type>Date[]</type>
+        </field>
+        <field>
+          <name>domArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>DOM[]</code>.]]></description>
+          <type>DOM[]</type>
+        </field>
+        <!-- not supported at all (even if JavaModelloGenerator.createField method has a case for it)
+        <field>
+          <name>referenceArray</name>
+          <version>2.0.0+</version>
+          <description><![CDATA[<code>Reference[]</code>.]]></description>
+          <type>Reference[]</type>
+        </field-->
+      </fields>
+    </class>
+
+    <class>
+      <name>AssociationFeatures</name>
+      <version>1.0.0+</version>
+      <description><![CDATA[
+        <code>&lt;field&gt;&lt;type&gt;<i>chose a type</i>&lt;/type&gt;&lt;field&gt;</code>:
+        Test of every simple types supported.]]>
+      </description>
+      <fields>
+        <field>
+          <name>listReferences</name>
+          <version>1.0.0+</version>
+          <type>List</type>
+          <association>
+            <type>Reference</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>setReferences</name>
+          <version>1.0.0+</version>
+          <type>Set</type>
+          <association>
+            <type>Reference</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>stringReferences</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>String</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>map</name>
+          <version>2.0.0+</version><!-- TODO: causes a problem with xsd plugin -->
+          <type>Map</type>
+          <association>
+            <type>String</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>properties</name>
+          <version>1.0.0+</version>
+          <type>Properties</type>
+          <association>
+            <type>String</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>bidi</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>Bidirectional</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>listOfBidis</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>BidiInList</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>setOfBidis</name>
+          <version>1.0.0+</version>
+          <type>Set</type>
+          <association>
+            <type>BidiInSet</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>Bidirectional</name>
+      <version>1.0.0+</version>
+      <description>
+        Test of a bidirectional association, ie an association that has a reference to its parent.
+      </description>
+      <fields>
+        <field>
+          <name>parent</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>AssociationFeatures</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>BidiInList</name>
+      <version>1.0.0+</version>
+      <fields>
+        <field>
+          <name>parent</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>AssociationFeatures</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>BidiInSet</name>
+      <version>1.0.0+</version>
+      <fields>
+        <field>
+          <name>parent</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>AssociationFeatures</type>
+            <multiplicity>1</multiplicity>
+          </association>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>JavaFeatures</name>
+      <version>1.0.0+</version>
+      <description><![CDATA[Test of java generation specific parameters: see
+        <a href="http://fisheye.codehaus.org/browse/modello/trunk/modello-core/src/main/java/org/codehaus/modello/plugin/java/JavaMetadataPlugin.java?r=trunk">JavaMetadataPlugin</a>
+        class.]]>
+      </description>
+      <fields>
+        <!--field>
+          <name>javaEnabled</name>
+          <version>1.0.0+</version>
+          <association java.adder="false">
+            <type>JavaEnabledFeature</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field-->
+        <field>
+          <name>javaListNoAdd</name>
+          <version>2.0.0+</version>
+          <association java.adder="false">
+            <type>Reference</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>javaSetNoAdd</name>
+          <version>2.0.0+</version>
+          <type>Set</type>
+          <association java.adder="false">
+            <type>Reference</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>javaAbstract</name>
+          <version>2.0.0+</version>
+          <association>
+            <type>JavaAbstractFeature</type>
+          </association>
+        </field>
+        <field>
+          <name>interfaces</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>InterfacesFeature</type>
+          </association>
+        </field>
+        <field>
+          <name>packageName</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>PackageNameFeature</type>
+          </association>
+        </field>
+        <field>
+          <name>base</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>BaseClass</type>
+          </association>
+        </field>
+        <field>
+          <name>subClass</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>SubClassLevel1</type>
+          </association>
+        </field>
+        <field>
+          <name>subClass2</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>SubClassLevel2</type>
+          </association>
+        </field>
+        <field>
+          <name>subClass3</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>SubClassLevel3</type>
+          </association>
+        </field>
+        <!--
+         - association features: java.bidi="false", java.useInterface="interfaceName", java.init="lazy|constructor|field"
+         - field features: java.getter="false", java.setter="false" -->
+      </fields>
+    </class>
+
+    <class java.enabled="false">
+      <name>JavaEnabledFeature</name>
+      <version>1.0.0+</version>
+      <description><![CDATA[<code>&lt;class java.enabled="false"&gt;</code>: a class disabled for java generation.]]></description>
+    </class>
+
+    <class java.abstract="true">
+      <name>JavaAbstractFeature</name>
+      <version>2.0.0+</version>
+      <description><![CDATA[<code>&lt;class java.abstract="true"&gt;</code>: a class generated in java as abstract.]]></description>
+    </class>
+
+    <class>
+      <name>InterfacesFeature</name>
+      <version>1.0.0+</version>
+      <description>.</description>
+      <interfaces>
+        <interface>java.io.Serializable</interface>
+        <interface>java.rmi.Remote</interface>
+        <interface>SubInterface</interface>
+        <interface>SubInterfaceInPackage</interface>
+      </interfaces>
+      <fields>
+        <field>
+          <name>id</name>
+          <type>String</type>
+          <version>1.0.0+</version>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>PackageNameFeature</name>
+      <version>1.0.0+</version>
+      <packageName>org.codehaus.modello.test.features.other</packageName>
+      <description><![CDATA[<code>&lt;class&gt;&lt;packageName&gt;<i>...</i>&lt;/packageName&gt;&lt;/class&gt;</code>:
+        A class generated in a package different from the default one.]]></description>
+      <fields>
+        <field>
+          <name>reference</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>Reference</type>
+          </association>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>BaseClass</name>
+      <version>1.0.0+</version>
+      <description>A base class, to be inherited.</description>
+      <fields>
+        <field>
+          <name>baseElement</name>
+          <type>int</type>
+          <version>1.0.0+</version>
+        </field>
+        <field xml.attribute="true">
+          <name>baseAttribute</name>
+          <type>int</type>
+          <version>1.0.0+</version>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>SubClassLevel1</name>
+      <version>1.0.0+</version>
+      <superClass>BaseClass</superClass>
+      <interfaces>
+        <interface>java.rmi.Remote</interface>
+      </interfaces>
+      <description><![CDATA[<code>&lt;class&gt;&lt;superClass&gt;BaseClass&lt;/superClass&gt;&lt;/class&gt;</code>:
+       A class inheriting from BaseClass.]]></description>
+      <fields>
+        <field>
+          <name>subElement1</name>
+          <type>long</type>
+          <version>1.0.0+</version>
+        </field>
+        <field xml.attribute="true">
+          <name>subAttribute1</name>
+          <type>long</type>
+          <version>1.0.0+</version>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>SubClassLevel2</name>
+      <version>1.0.0+</version>
+      <superClass>SubClassLevel1</superClass>
+      <description><![CDATA[<code>&lt;class&gt;&lt;superClass&gt;SubClassLevel1&lt;/superClass&gt;&lt;/class&gt;</code>:
+       A class inheriting from SubClassLevel1.]]></description>
+      <fields>
+        <field>
+          <name>subElement2</name>
+          <type>float</type>
+          <version>1.0.0+</version>
+        </field>
+        <field xml.attribute="true">
+          <name>subAttribute2</name>
+          <type>float</type>
+          <version>1.0.0+</version>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>SubClassLevel3</name>
+      <version>1.0.0+</version>
+      <superClass>SubClassLevel2</superClass>
+      <description><![CDATA[<code>&lt;class&gt;&lt;superClass&gt;SubClassLevel2&lt;/superClass&gt;&lt;/class&gt;</code>:
+       A class inheriting from SubClassLevel2.]]></description>
+      <fields>
+        <field>
+          <name>subElement3</name>
+          <type>double</type>
+          <version>1.0.0+</version>
+        </field>
+        <field xml.attribute="true">
+          <name>subAttribute3</name>
+          <type>double</type>
+          <version>1.0.0+</version>
+        </field>
+      </fields>
+    </class>
+
+    <class xsd.compositor="sequence">
+      <name>XmlFeatures</name>
+      <version>1.0.0+</version>
+      <description><![CDATA[Test of XML specific parameters: see
+        <a href="http://fisheye.codehaus.org/browse/modello/trunk/modello-plugins/modello-plugin-xml/src/main/java/org/codehaus/modello/plugins/xml/XmlMetadataPlugin.java?r=trunk">XmlMetadataPlugin</a>
+        class.]]>
+      </description>
+      <fields>
+        <field>
+          <name>attributes</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>XmlAttributes</type>
+          </association>
+        </field>
+        <field>
+          <name>attributesDefault</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>XmlAttributes</type>
+          </association>
+        </field>
+        <field xml.tagName="tagName">
+          <name>fieldName</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;field xml.tagName="<i>tagName</i>"&gt;</code>: a field with an XML name different from the field name.]]></description>
+          <type>String</type>
+        </field>
+        <field xml.attribute="true" xml.tagName="tagNameAttribute">
+          <name>fieldNameAttribute</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;field xml.attribute="true" xml.tagName="<i>tagName</i>"&gt;</code>]]></description>
+          <type>String</type>
+        </field>
+        <field xml.format="yyyy-MM-dd'T'HH:mm:ss">
+          <name>dateXmlFormat</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;field xml.format="<i>SimpleDateFormat specification</i>"&gt;</code>: a Date field with a specified format.]]></description>
+          <type>Date</type>
+        </field>
+        <field xml.format="long">
+          <name>dateLong</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;field xml.format="long"&gt;</code>: a Date field as a long value in XML.]]></description>
+          <type>Date</type>
+        </field>
+        <field>
+          <name>xmlItemsStyleFlats</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;field&gt;&lt;association xml.listStyle="flat"/&gt;&lt;/field&gt;</code>: a "flat" list, ie without enclosing tag.]]></description>
+          <association xml.itemsStyle="flat">
+            <type>Reference</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>xmlAssociationTagNames</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;field&gt;&lt;association xml.tagName="<i>association</i>"&gt;&lt;/field&gt;</code>:
+            a list with an XML name different from calculated singular of tag name.]]></description>
+          <association xml.tagName="association">
+            <type>Reference</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field xml.tagName="fieldTagNames">
+          <name>xmlTagNameAssociation</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;field xml.tagName="fieldTagNames"&gt;&lt;association&gt;&lt;/field&gt;</code>:
+            a list with an XML name different from field name.]]></description>
+          <association>
+            <type>Reference</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field xml.tagName="fieldTagName">
+          <name>xmlTagNameAssociationTagNames</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;field xml.tagName="fieldTagName"&gt;&lt;association xml.tagName="association"&gt;&lt;/field&gt;</code>:
+            a list with an XML name different from field name and an XML name different from calculated singular of tag name.]]></description>
+          <association xml.tagName="association">
+            <type>Reference</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>xmlFlatAssociationTagNames</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;field&gt;&lt;association xml.itemsStyle="flat" xml.tagName="<i>association</i>"&gt;&lt;/field&gt;</code>:
+            a flat list with an XML name different from calculated singular of tag name.]]></description>
+          <association xml.itemsStyle="flat" xml.tagName="association">
+            <type>Reference</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>explodeProperties</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;type&gt;Properties&lt;/type&gt;&lt;association xml.mapStyle="explode"&gt;</code>.]]></description>
+          <type>Properties</type>
+          <association xml.mapStyle="explode">
+            <type>String</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>inlineProperties</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;type&gt;Properties&lt;/type&gt;&lt;association xml.mapStyle="inline"&gt;</code> (default).]]></description>
+          <type>Properties</type>
+          <association xml.mapStyle="inline">
+            <type>String</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <!--field>
+          <name>flatExplodeProperties</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;type&gt;Properties&lt;/type&gt;&lt;association xml.mapStyle="explode"&gt;</code>.]]></description>
+          <type>Properties</type>
+          <association xml.itemsStyle="flat" xml.mapStyle="explode">
+            <type>String</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>flatInlineProperties</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;type&gt;Properties&lt;/type&gt;&lt;association xml.mapStyle="inline"&gt;</code> (default).]]></description>
+          <type>Properties</type>
+          <association xml.itemsStyle="flat" xml.mapStyle="inline">
+            <type>String</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>flatAssociationExplodeProperties</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>&lt;type&gt;Properties&lt;/type&gt;&lt;association xml.mapStyle="explode"&gt;</code>.]]></description>
+          <type>Properties</type>
+          <association xml.itemsStyle="flat" xml.tagName="property" xml.mapStyle="explode">
+            <type>String</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field-->
+        <field>
+          <name>xsdFeatures</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>XsdFeatures</type>
+          </association>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>XmlAttributes</name>
+      <version>1.0.0+</version>
+      <description><![CDATA[<code>&lt;field xml.attribute="true"&gt;</code>: fields as XML attribute instead of element,
+        for every simple type.]]>
+      </description>
+      <fields>
+        <field xml.attribute="true">
+          <name>primitiveBoolean</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>boolean</code> primitive.]]></description>
+          <type>boolean</type>
+          <defaultValue>true</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>primitiveByte</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>byte</code> primitive.]]></description>
+          <type>byte</type>
+          <defaultValue>12</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>primitiveChar</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>char</code> primitive.]]></description>
+          <type>char</type>
+          <defaultValue>H</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>primitiveShort</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>short</code> primitive.]]></description>
+          <type>short</type>
+          <defaultValue>1212</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>primitiveInt</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>int</code> primitive.]]></description>
+          <type>int</type>
+          <defaultValue>121212</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>primitiveLong</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>long</code> primitive.]]></description>
+          <type>long</type>
+          <defaultValue>12121212</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>primitiveFloat</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>float</code> primitive.]]></description>
+          <type>float</type>
+          <defaultValue>12.12</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>primitiveDouble</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>double</code> primitive.]]></description>
+          <type>double</type>
+          <defaultValue>12.12</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>objectBoolean</name>
+          <version>2.0.0+</version><!-- causes a problem with StAX plugin -->
+          <description><![CDATA[<code>Boolean</code> class.]]></description>
+          <type>Boolean</type>
+          <defaultValue>Boolean.FALSE</defaultValue>
+        </field>
+        <!--field xml.attribute="true">
+          <name>objectByte</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Byte</code> class.]]></description>
+          <type>Byte</type>
+          <defaultValue>12</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>objectChar</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Char</code> class.]]></description>
+          <type>Char</type>
+          <defaultValue>H</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>objectShort</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Short</code> class.]]></description>
+          <type>Short</type>
+          <defaultValue>1212</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>objectInteger</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Integer</code> class.]]></description>
+          <type>Integer</type>
+          <defaultValue>new Integer( 12 )</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>objectLong</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Long</code> class.]]></description>
+          <type>Long</type>
+          <defaultValue>new Long( 12 )</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>objectFloat</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Float</code> class.]]></description>
+          <type>Float</type>
+          <defaultValue>new Float( 12.12 )</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>objectDouble</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Double</code> class.]]></description>
+          <type>Double</type>
+          <defaultValue>new Double( 12.12 )</defaultValue>
+        </field-->
+        <field xml.attribute="true">
+          <name>objectString</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>String</code> class.]]></description>
+          <type>String</type>
+          <defaultValue>default value</defaultValue>
+        </field>
+        <field xml.attribute="true">
+          <name>objectDate</name>
+          <version>1.0.0+</version>
+          <description><![CDATA[<code>Date</code> class.]]></description>
+          <type>Date</type>
+        </field>
+      </fields>
+    </class>
+
+    <class xsd.compositor="sequence">
+      <name>XsdFeatures</name>
+      <version>1.0.0+</version>
+      <description><![CDATA[Test of XSD specific parameters: see
+        <a href="http://fisheye.codehaus.org/browse/modello/trunk/modello-plugins/modello-plugin-xsd/src/main/java/org/codehaus/modello/plugin/xsd/metadata/XsdMetadataPlugin.java?r=trunk">XsdMetadataPlugin</a>
+        class.]]>
+      </description>
+      <fields>
+        <field xml.attribute="true">
+          <name>attribute</name>
+          <version>1.0.0+</version>
+          <type>String</type>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>XdocFeatures</name>
+      <version>1.0.0+</version>
+      <description><![CDATA[Test of XDOC specific parameters: see
+        <a href="http://fisheye.codehaus.org/browse/modello/trunk/modello-plugins/modello-plugin-xdoc/src/main/java/org/codehaus/modello/plugin/xdoc/metadata/XdocMetadataPlugin.java?r=trunk">XdocMetadataPlugin</a>
+        class.]]>
+      </description>
+      <fields>
+        <field>
+          <name>field</name>
+          <version>1.0.0+</version>
+          <type>String</type>
+        </field>
+        <field xdoc.separator="none">
+          <name>xdocSeparatorNone</name>
+          <description><![CDATA[<code>&lt;field xdoc.separator="none"&gt;</code>.]]></description>
+          <version>1.0.0+</version>
+          <type>String</type>
+        </field>
+        <field xdoc.separator="blank">
+          <name>xdocSeparatorBlank</name>
+          <description><![CDATA[<code>&lt;field  xdoc.separator="blank"&gt;</code>.]]></description>
+          <version>1.0.0+</version>
+          <type>String</type>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>Reference</name>
+      <version>1.0.0+</version>
+      <description>A simple class for association demo.</description>
+      <fields>
+        <field>
+          <name>id</name>
+          <alias>key</alias>
+          <version>1.0.0+</version>
+          <type>String</type>
+          <identifier>true</identifier>
+        </field>
+      </fields>
+    </class>
+
+    <class>
+      <name>NodeItem</name>
+      <version>1.0.0+</version>
+      <fields>
+        <field>
+          <name>value</name>
+          <version>1.0.0+</version>
+          <type>String</type>
+        </field>
+        <field>
+          <name>child</name>
+          <version>1.0.0+</version>
+          <association>
+            <type>NodeItem</type>
+          </association>
+        </field>
+      </fields>
+    </class>
+
+  </classes>
+
+  <interfaces>
+
+    <interface>
+      <name>SimpleInterface</name>
+      <description>A simple interface definition.</description>
+      <version>1.0.0+</version>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0+</version>
+          <code>
+            public final static String CODE_SEGMENT = "freedom with codeSegment";
+          </code>
+        </codeSegment>
+      </codeSegments>
+    </interface>
+
+    <interface>
+      <name>SubInterface</name>
+      <superInterface>SimpleInterface</superInterface>
+      <description>An interface extending SimpleInterface.</description>
+      <version>1.0.0+</version>
+    </interface>
+
+    <interface>
+      <name>SubInterfaceInPackage</name>
+      <superInterface>SimpleInterface</superInterface>
+      <packageName>org.codehaus.modello.test.features.other</packageName>
+      <description>An interface extending SimpleInterface in a package different from default package.</description>
+      <version>1.0.0+</version>
+    </interface>
+
+  </interfaces>
+
+</model>
