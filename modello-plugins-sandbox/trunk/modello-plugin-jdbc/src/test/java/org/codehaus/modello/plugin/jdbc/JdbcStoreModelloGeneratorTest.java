@@ -22,6 +22,7 @@ package org.codehaus.modello.plugin.jdbc;
  * SOFTWARE.
  */
 
+import java.io.File;
 import java.util.Properties;
 
 import org.codehaus.modello.AbstractModelloGeneratorTest;
@@ -55,7 +56,7 @@ public class JdbcStoreModelloGeneratorTest
 
         Properties parameters = new Properties();
 
-        parameters.setProperty( ModelloParameterConstants.OUTPUT_DIRECTORY, getGeneratedSources().getAbsolutePath() );
+        parameters.setProperty( ModelloParameterConstants.OUTPUT_DIRECTORY, getOutputDirectory().getAbsolutePath() );
 
         parameters.setProperty( ModelloParameterConstants.VERSION, "1.0.0" );
 
@@ -63,12 +64,10 @@ public class JdbcStoreModelloGeneratorTest
 
         core.generate( model, "jdbc-store", parameters );
 
-        core.generate( model, "java", parameters );
-
         // ----------------------------------------------------------------------
         // Assert
         // ----------------------------------------------------------------------
 
-        assertGeneratedFileExists( "org/mergere/tissue/TissueJdbcStore.java" );
-    }
+        assertTrue( new File( getOutputDirectory(), "org/mergere/tissue/TissueJdbcStore.java" ).exists() );
+   }
 }

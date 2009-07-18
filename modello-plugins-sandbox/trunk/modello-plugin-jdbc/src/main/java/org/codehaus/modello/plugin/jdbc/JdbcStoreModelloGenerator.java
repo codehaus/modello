@@ -94,7 +94,7 @@ public class JdbcStoreModelloGenerator
 
         String className = model.getName() + "JdbcStore";
 
-        writeClass( "/org/codehaus/modello/plugin/jdbc/templates/JdbcStore.java.vm",
+        writeClass( "org/codehaus/modello/plugin/jdbc/templates/JdbcStore.java.vm",
                     getOutputDirectory(), packageName, className,
                     context );
     }
