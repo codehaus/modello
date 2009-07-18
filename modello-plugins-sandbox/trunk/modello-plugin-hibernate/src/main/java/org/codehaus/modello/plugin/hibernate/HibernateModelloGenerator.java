@@ -24,28 +24,22 @@ package org.codehaus.modello.plugin.hibernate;
 
 import java.util.Properties;
 import java.io.File;
-import java.io.Writer;
 
 import org.apache.velocity.context.Context;
 import org.apache.velocity.VelocityContext;
 
-import org.codehaus.modello.plugin.AbstractModelloGenerator;
+import org.codehaus.modello.plugin.store.AbstractVelocityModelloGenerator;
 import org.codehaus.modello.plugin.store.metadata.StoreClassMetadata;
 import org.codehaus.modello.model.Model;
 import org.codehaus.modello.ModelloException;
-import org.codehaus.plexus.util.WriterFactory;
-import org.codehaus.plexus.velocity.VelocityComponent;
 
 /**
  * @author <a href="mailto:trygvis@inamo.no">Trygve Laugst&oslash;l</a>
  * @version $Id$
  */
 public class HibernateModelloGenerator
-    extends AbstractModelloGenerator
+    extends AbstractVelocityModelloGenerator
 {
-    /** @plexus.requirement */
-    private VelocityComponent velocity;
-
     public void generate( Model model, Properties properties )
         throws ModelloException
     {
@@ -83,31 +77,8 @@ public class HibernateModelloGenerator
             }
         }
 
-        String template = "/org/codehaus/modello/plugin/hibernate/templates/hibernate.hbm.xml.vm";
+        String template = "org/codehaus/modello/plugin/hibernate/templates/hibernate.hbm.xml.vm";
 
         writeTemplate( template, file, context );
-    }
-
-    // ----------------------------------------------------------------------
-    //
-    // ----------------------------------------------------------------------
-
-    private void writeTemplate( String template, File file, Context context )
-        throws ModelloException
-    {
-        try
-        {
-            Writer writer = WriterFactory.newXmlWriter( file );
-
-            velocity.getEngine().mergeTemplate( template, context, writer );
-
-            writer.flush();
-
-            writer.close();
-        }
-        catch ( Exception e )
-        {
-            throw new ModelloException( "Error while generating code.", e );
-        }
     }
 }
