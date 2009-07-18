@@ -3,18 +3,19 @@
   <parent>
     <groupId>org.codehaus.modello</groupId>
     <artifactId>modello</artifactId>
-    <version>1.0-alpha-8</version>
+    <version>1.0.2</version>
   </parent>
+
   <artifactId>modello-plugins-sandbox</artifactId>
   <packaging>pom</packaging>
-  <version>1</version>
+  <version>1.0.2-SNAPSHOT</version>
 
   <scm>
     <connection>scm:svn:http://svn.codehaus.org/modello/modello-plugins-sandbox/trunk</connection>
     <developerConnection>scm:svn:https://svn.codehaus.org/modello/modello-plugins-sandbox/trunk</developerConnection>
     <url>http://svn.modello.codehaus.org/browse/modello/modello-plugins-sandbox/trunk</url>
-  </scm>  
-  
+  </scm>
+
   <name>Modello Plugin Sandbox Parent</name>
   <dependencies>
     <dependency>
@@ -24,8 +25,10 @@
     <dependency>
       <groupId>org.codehaus.modello</groupId>
       <artifactId>modello-test</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
+
   <modules>
   </modules>
 </project>
