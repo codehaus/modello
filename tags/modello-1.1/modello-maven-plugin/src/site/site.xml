@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  <bannerLeft>
+    <name>Modello</name>
+  </bannerLeft>
+
+  <body>
+
+    <menu ref="parent" />
+
+    <menu name="Overview">
+      <item name="Introduction" href="index.html"/>
+      <item name="Goals" href="plugin-info.html"/>
+      <item name="Usage" href="usage.html"/>
+      <item name="FAQ" href="faq.html"/>
+    </menu>
+
+    <menu name="Examples">
+      <item name="Multi Model Configuration" href="examples/multi-model.html" />
+    </menu>
+
+  </body>
+</project>
