@@ -1,0 +1,66 @@
+ ------
+ Example of multi-model configuration
+ ------
+ Denis Cabasson
+ ------
+ 10 August 2006
+ ------
+
+Processing Multiple Modello Models
+
+* Configuring your pom.xml
+
+  You can use the following configuration in your <<<pom.xml>>> to have the Modello
+  Plugin take two of your models into account (this configuration is taken
+  from the maven-assembly-plugin which indeed uses two different models).
+
++---+
+<project>
+  [...]
+  <build>
+    <plugins>
+      [...]
+        <groupId>org.codehaus.modello</groupId>
+        <artifactId>modello-maven-plugin</artifactId>
+        <version>${project.version}</version>
+        <executions>
+          <execution>
+            <id>mdo</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>xpp3-reader</goal>
+              <goal>xpp3-writer</goal>
+              <goal>java</goal>
+              <goal>xsd</goal>
+            </goals>
+            <configuration>
+              <models>
+                <model>src/main/mdo/descriptor.mdo</model>
+                <model>src/main/mdo/component.mdo</model>
+              <models>
+              <version>1.0.0</version>
+            </configuration>
+          </execution>
+          <execution>
+            <id>mdo-site</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>xdoc</goal>
+              <goal>xsd</goal>
+            </goals>
+            <configuration>
+              <models>
+                <model>src/main/mdo/descriptor.mdo</model>
+                <model>src/main/mdo/component.mdo</model>
+              </models>
+              <version>1.0.0</version>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      [...]
+    </plugins>
+  </build>
+  [...]
+</project>
++---+
