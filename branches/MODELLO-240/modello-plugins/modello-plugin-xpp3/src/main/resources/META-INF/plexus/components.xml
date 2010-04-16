@@ -1,0 +1,19 @@
+<component-set>
+  <components>
+    <component>
+      <role>org.codehaus.modello.plugin.ModelloGenerator</role>
+      <role-hint>xpp3-reader</role-hint>
+      <implementation>org.codehaus.modello.plugin.xpp3.Xpp3ReaderGenerator</implementation>
+    </component>
+    <component>
+      <role>org.codehaus.modello.plugin.ModelloGenerator</role>
+      <role-hint>xpp3-extended-reader</role-hint>
+      <implementation>org.codehaus.modello.plugin.xpp3.Xpp3ExtendedReaderGenerator</implementation>
+    </component>
+    <component>
+      <role>org.codehaus.modello.plugin.ModelloGenerator</role>
+      <role-hint>xpp3-writer</role-hint>
+      <implementation>org.codehaus.modello.plugin.xpp3.Xpp3WriterGenerator</implementation>
+    </component>
+  </components>
+</component-set>

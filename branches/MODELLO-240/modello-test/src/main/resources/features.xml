@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+
+<features-demo xmlns="http://modello.codehaus.org/FEATURES/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://modello.codehaus.org/FEATURES/1.0.0 http://modello.codehaus.org/features-1.0.0.xsd">
+  <versionField>1.0.0</versionField>
+  <!--required></required--><!-- TODO: this field is marked required but not set in the XML, should fail... -->
+  <identifier>id</identifier>
+  <identifierPart2><id>reference</id></identifierPart2>
+
+  <simpleTypes>
+    <primitiveBoolean>false</primitiveBoolean>
+    <primitiveByte>-70</primitiveByte>
+    <primitiveChar>h</primitiveChar>
+    <primitiveShort>-7070</primitiveShort>
+    <primitiveInt>-707070</primitiveInt>
+    <primitiveLong>-707070707070</primitiveLong>
+    <primitiveFloat>-7.7</primitiveFloat>
+    <primitiveDouble>-7.7</primitiveDouble>
+    <objectString>String value from XML file</objectString>
+    <objectDate>2007-07-21T21:07:07.007</objectDate>
+    <dom>
+      <foo>bar</foo>
+      <bar att1="value">baz</bar>
+      <el1>
+        <el2>text</el2>
+      </el1>
+    </dom>
+    <content attr="attribute">content value</content>
+  </simpleTypes>
+  <defaultValues></defaultValues>
+
+  <associationFeatures>
+    <listReferences>
+      <listReference><id>first</id></listReference>
+      <listReference><id>second</id></listReference>
+      <listReference><id>third</id></listReference>
+      <!-- MODELLO-140: alias feature is not supported by xsd plugin, need to comment this part to avoid failure
+      <listReference><key>alias</key></listReference>
+      -->
+    </listReferences>
+    <setReferences>
+      <setReference><id>first</id></setReference>
+    </setReferences>
+    <listStrings>
+      <listString>first</listString>
+      <listString>second</listString>
+      <listString>third</listString>
+    </listStrings>
+    <setStrings>
+      <setString>first</setString>
+    </setStrings>
+    <properties>
+      <theKey>theValue</theKey>
+    </properties>
+  </associationFeatures>
+
+  <javaFeatures>
+    <base baseAttribute="12">
+      <baseElement>12</baseElement>
+    </base>
+    <subClass subAttribute1="12" baseAttribute="12">
+      <subElement1>12</subElement1>
+      <baseElement>12</baseElement>
+    </subClass>
+    <subClass2 subAttribute2="12.12" subAttribute1="12" baseAttribute="12">
+      <subElement2>12.12</subElement2>
+      <subElement1>12</subElement1>
+      <baseElement>12</baseElement>
+    </subClass2>
+    <subClass3 subAttribute3="12.12" subAttribute2="12.12" subAttribute1="12" baseAttribute="12">
+      <subElement3>12.12</subElement3>
+      <subElement2>12.12</subElement2>
+      <subElement1>12</subElement1>
+      <baseElement>12</baseElement>
+    </subClass3>
+  </javaFeatures>
+
+  <xmlFeatures tag-name.attribute="another value from XML file">
+    <attributes
+      primitiveBoolean="false"
+      primitiveByte="-70"
+      primitiveChar="h"
+      primitiveShort="-7070"
+      primitiveInt="-707070"
+      primitiveLong="-707070707070"
+      primitiveFloat="-7.7"
+      primitiveDouble="-7.7"
+      objectString="String value from XML file"
+      objectDate="2012-12-24T22:12:12.012"
+      tag-name="value"
+    ></attributes>
+    <attributesDefault></attributesDefault>
+    <tag-name>value from XML file</tag-name>
+    <dateXmlFormat>2012-12-24T22:12:12</dateXmlFormat>
+    <dateLong>121212121212</dateLong>
+
+    <xmlItemsStyleFlat><id>flat first</id></xmlItemsStyleFlat>
+    <xmlItemsStyleFlat><id>flat second</id></xmlItemsStyleFlat>
+    <xmlItemsStyleFlat><id>flat third</id></xmlItemsStyleFlat>
+
+    <xmlAssociationTagNames>
+      <association.tag-name><id>first</id></association.tag-name>
+      <association.tag-name><id>second</id></association.tag-name>
+      <association.tag-name><id>third</id></association.tag-name>
+    </xmlAssociationTagNames>
+
+    <field.tag-names>
+      <field.tag-name><id>first</id></field.tag-name>
+      <field.tag-name><id>second</id></field.tag-name>
+      <field.tag-name><id>third</id></field.tag-name>
+    </field.tag-names>
+
+    <field.tag-name>
+      <association.tag-name><id>first</id></association.tag-name>
+      <association.tag-name><id>second</id></association.tag-name>
+      <association.tag-name><id>third</id></association.tag-name>
+    </field.tag-name>
+
+    <!-- xmlFlatAssociationTagNames -->
+    <association.tag-name><id>flat first</id></association.tag-name>
+    <association.tag-name><id>flat second</id></association.tag-name>
+    <association.tag-name><id>flat third</id></association.tag-name>
+
+    <explodeProperties>
+      <explodeProperty>
+        <key>aKey</key>
+        <value>aValue</value>
+      </explodeProperty>
+      <explodeProperty>
+        <key>key</key>
+        <value>value</value>
+      </explodeProperty>
+      <explodeProperty>
+        <key>theKey</key>
+        <value>theValue</value>
+      </explodeProperty>
+    </explodeProperties>
+    <inlineProperties>
+      <aKey>aValue</aKey>
+      <key>value</key>
+      <theKey>theValue</theKey>
+    </inlineProperties>
+
+    <!--flatExplodeProperty>
+      <key>theKey</key>
+      <value>theValue</value>
+    </flatExplodeProperty>
+    <theKey>theValue for a flat property</theKey>
+
+    <property>
+      <key>theKey</key>
+      <value>theValue</value>
+    </property-->
+
+    <xmlTransientFields>
+      <persistentField>PASSED</persistentField>
+    </xmlTransientFields>
+
+    <xmlFieldsOrder>
+      <field1>first</field1>
+      <field-2>second</field-2>
+      <field3>third</field3>
+      <field4>fourth</field4>
+      <field5>fifth</field5>
+      <field6>sixth</field6>
+      <field7>seventh</field7>
+    </xmlFieldsOrder>
+
+    <xsdFeatures attribute="one more value from XML file" />
+  </xmlFeatures>
+
+  <node>
+    <value>1</value>
+    <child>
+      <value>2</value>
+      <child>
+        <value>3</value>
+        <child>
+          <value>4</value>
+        </child>
+      </child>
+    </child>
+  </node>
+
+  <!--rootRecursion> MODELLO-226
+    <node><value>1</value></node>
+    <rootRecursion>
+      <node><value>2</value></node>
+      <rootRecursion>
+        <node><value>3</value></node>
+      </rootRecursion>
+    </rootRecursion>
+  </rootRecursion-->
+</features-demo>
