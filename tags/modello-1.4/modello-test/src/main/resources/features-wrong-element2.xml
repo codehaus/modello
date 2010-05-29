@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<features-demo xmlns="http://modello.codehaus.org/FEATURES/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://modello.codehaus.org/FEATURES/1.0.0 http://modello.codehaus.org/features-1.0.0.xsd">
+  <versionField>1.0.0</versionField>
+  <required></required>
+
+  <simpleTypes>
+    <objectString>good</objectString>
+    <invalidElement>
+      <!--
+      NOTE: The essential piece here is that this invalid element
+      a) has child elements and
+      b) has a not-first-in-list child that matches a valid but already parsed element of the parent (objectString)
+      -->
+      <childOfInvalidElement>foo</childOfInvalidElement>
+      <objectString>If strict, parsing should fail.</objectString>
+    </invalidElement>
+  </simpleTypes>
+</features-demo>
