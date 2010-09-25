@@ -1,0 +1,86 @@
+ ------
+ Usage
+ ------
+ Denis Cabasson
+ ------
+ 10 August 2006
+ ------
+
+Usage
+
+  This document is intended to provide instructions for using the
+  modello-maven-plugin.
+
+* Typical configuration of the plugin in pom.xml
+
+   You can use the following configuration in your <<<pom.xml>>> to invoke the Modello
+   Plugin.
+
++---+
+<project>
+  [...]
+  <build>
+    <plugins>
+      [...]
+      <plugin>
+        <groupId>org.codehaus.modello</groupId>
+        <artifactId>modello-maven-plugin</artifactId>
+        <version>${project.version}</version>
+        <configuration>
+          <models>
+            <model>src/main/mdo/myModel.mdo</model>
+          </models>
+          <version>1.0.0</version>
+        </configuration>
+        <executions>
+          <execution>
+            <id>myModel</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>java</goal>
+              <goal>xpp3-reader</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>myModel-site-xsd</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>xsd</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>target/generated-site/resources/xsd</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>myModel-site-doc</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>xdoc</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      [...]
+    </plugins>
+  </build>
+  [...]
+</project>
++---+
+
+  This configuration will take into account the model described in the file <<<src/main/mdo/myModel.mdo>>> in version 1.0.0. It will execute the following goals in the <<<generate-source>>> phase:
+
+  * {{{./java-mojo.html}java}} which will generate Java beans from the model,
+
+  * {{{./xpp3-reader-mojo.html}xpp3-reader}} which will create an XPP reader for the model.
+
+  []
+
+  The generated Java sources will be located in the <<<target/generated-sources/modello>>> folder (or in the folder set by the <<<outputDirectory>>> parameter), which will be added as a source folder to the project build cycle.
+
+  During the <<<pre-site>>> phase, it will execute the following goals:
+
+  * {{{./xdoc-mojo.html}xdoc}} which will generate a documentation of the model in the <<<target/generated-site/xdoc>>> folder, which will in turn be processed to output in the standard site, during the <<<site>>> phase,
+
+  * {{{./xsd-mojo.html}xsd}} which will generate an XML Schema for our model in the <<<target/generated-site/resources/xsd>>> folder (set by the <<<outputDirectory>>> parameter), which will in turn be copied in the standard site, during the <<<site>>> phase.
+
+  []
